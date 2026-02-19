@@ -282,6 +282,8 @@ public interface ClaimEditor {
             });
             // Set the new owner's spent blocks so unclaim accounting works correctly
             claimWorld.getUser(newOwner.getUuid()).ifPresent(owner -> {
+                getPlugin().editClaimBlocks(
+                        owner, ClaimBlocksManager.ClaimBlockSource.CLAIM_CREATED, (blocks) -> blocks - surfaceArea);
                 getPlugin().editSpentClaimBlocks(
                         owner, ClaimBlocksManager.ClaimBlockSource.CLAIM_CREATED, (blocks) -> blocks + surfaceArea);
             });
